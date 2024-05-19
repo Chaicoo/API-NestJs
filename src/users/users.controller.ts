@@ -14,22 +14,22 @@ import { RequestUserDto } from './dto/request-user.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
+  @Post('/create')
   create(@Body() createUserDto: RequestUserDto) {
     return this.usersService.create(createUserDto);
   }
 
-  @Get()
+  @Get('/list')
   findAll() {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
+  @Get('/read/:id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch('/update/:id')
   update(
     @Param('id') id: string,
     @Body() updateUserDto: Partial<RequestUserDto>,
@@ -37,7 +37,7 @@ export class UsersController {
     return this.usersService.update(+id, updateUserDto);
   }
 
-  @Delete(':id')
+  @Delete('/delete/:id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }
