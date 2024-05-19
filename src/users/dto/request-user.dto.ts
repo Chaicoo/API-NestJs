@@ -1,13 +1,13 @@
-import { IsBoolean, IsEmpty, IsString, MinLength } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsString, MinLength } from 'class-validator';
 
 export class RequestUserDto {
   @IsString()
-  @IsEmpty()
+  @IsNotEmpty()
   @MinLength(3)
   firstName: string;
 
   @IsString()
-  @IsEmpty()
+  @IsNotEmpty()
   @MinLength(3)
   lastName: string;
 
