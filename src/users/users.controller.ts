@@ -39,7 +39,7 @@ export class UsersController {
   ) {
     const user = await this.authService.validateUser(email, password);
     if (!user) {
-      throw new BadRequestException('Invalid email or password');
+      throw new BadRequestException('Email ou senha inválidos!');
     }
 
     return this.authService.login(user);

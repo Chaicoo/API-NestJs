@@ -4,7 +4,9 @@ import {
   IsNotEmpty,
   IsString,
   MinLength,
+  Validate,
 } from 'class-validator';
+import { UniqueEmail } from './unique-email.validator';
 
 export class RequestUserDto {
   @IsString()
@@ -19,6 +21,7 @@ export class RequestUserDto {
 
   @IsEmail()
   @IsNotEmpty()
+  @Validate(UniqueEmail)
   email: string;
 
   @IsString()
