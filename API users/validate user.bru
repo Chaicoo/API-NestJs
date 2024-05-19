@@ -1,19 +1,17 @@
 meta {
-  name: create
+  name: validate user
   type: http
-  seq: 2
+  seq: 6
 }
 
 post {
-  url: http://localhost:3000/users/create
+  url: http://localhost:3000/users/validate
   body: json
   auth: none
 }
 
 body:json {
   {
-    "firstName": "Chico",
-    "lastName": "Nolêto",
     "email": "email@email.com",
     "password": "testando"
   }
