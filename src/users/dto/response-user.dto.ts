@@ -1,4 +1,14 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { RequestUserDto } from './request-user.dto';
+import { UserEntity } from '../entities/user.entity';
 
-export class ResponseUserDto extends PartialType(RequestUserDto) {}
+export class ResponseUserDto {
+  id: string;
+  firstName: string;
+  lastName: string;
+  isActive: boolean;
+
+  constructor(user: Partial<UserEntity>) {
+    this.firstName = user.firstName;
+    this.lastName = user.lastName;
+    this.isActive = user.isActive;
+  }
+}
