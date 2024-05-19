@@ -9,19 +9,22 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { RequestUserDto } from './dto/request-user.dto';
+import { ResponseUserDto } from './dto/response-user.dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post('/create')
-  create(@Body() createUserDto: RequestUserDto) {
-    return this.usersService.create(createUserDto);
+  async create(@Body() createUserDto: RequestUserDto) {
+    const creatUser = await this.usersService.create(createUserDto);
+
+    return new ResponseUserDto(creatUser);
   }
 
   @Get('/list')
-  findAll() {
-    return this.usersService.findAll();
+  async findAll() {
+    return await this.usersService.findAll();
   }
 
   @Get('/read/:id')
