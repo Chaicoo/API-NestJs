@@ -10,6 +10,7 @@ import {
 import { UsersService } from './users.service';
 import { RequestUserDto } from './dto/request-user.dto';
 import { ResponseUserDto } from './dto/response-user.dto';
+import { UserEntity } from './entities/user.entity';
 
 @Controller('users')
 export class UsersController {
@@ -24,24 +25,28 @@ export class UsersController {
 
   @Get('/list')
   async findAll() {
-    return await this.usersService.findAll();
+    const allUsers = await this.usersService.findAll();
+
+    return allUsers.map((user: UserEntity) => new ResponseUserDto(user));
   }
 
   @Get('/read/:id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const foundUser = await this.usersService.findOne(+id);
+
+    return new ResponseUserDto(foundUser);
   }
 
   @Patch('/update/:id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateUserDto: Partial<RequestUserDto>,
   ) {
-    return this.usersService.update(+id, updateUserDto);
+    return await this.usersService.update(+id, updateUserDto);
   }
 
   @Delete('/delete/:id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.usersService.remove(+id);
   }
 }
